@@ -1,5 +1,5 @@
 # Virtual Assistant
-A virtual desktop assistant written in Python to help and perform the general day to day task.
+>A virtual desktop assistant written in Python to help and perform the general day to day task.
 
 ## Usage
 
@@ -24,6 +24,7 @@ ExecuteVirtualAssistant.cmd
 
 - pyttsx3 (https://pyttsx3.readthedocs.io/)
 - SpeechRecognition (https://github.com/Uberi/speech_recognition)
+- PyAudio (http://people.csail.mit.edu/hubert/pyaudio/)
 
 ## Installation
 Set up a virtual environment and install the dependencies:
