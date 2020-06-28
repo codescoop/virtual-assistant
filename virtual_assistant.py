@@ -2,6 +2,9 @@ import pyttsx3
 import speech_recognition as sr
 import datetime
 import wikipedia
+import webbrowser
+import os
+import smtplib
 
 engine = pyttsx3.init("sapi5")
 voice = engine.getProperty("voices")
@@ -48,6 +51,15 @@ def input():
 
     return query
 
+def sendEmail(to, content):
+    server = smtplib.SMTP("smtp.gmail.com",587)
+    server.ehlo()
+    server.starttls()
+    password=open("pwd.txt","r").read()
+    server.login("testscoop4321@gmail.com", password)
+    server.sendmail("testscoop4321@gmail.com", to,content)
+    server.close()
+
 if __name__ == "__main__":
     greet()
     # input()
@@ -62,3 +74,41 @@ if __name__ == "__main__":
             speak("According to Wikipedia")
             print(results)
             speak(results)
+
+        elif "open youtube" in query:
+            webbrowser.open("youtube.com")
+
+        elif "open google" in query:
+            webbrowser.open("google.com")
+
+        elif "open stackflow" in query:
+            webbrowser.open("stackoverflow.com")
+
+        elif "play music" in query:
+            music_dir = r'D:\Songs\Pendrive\Eng'
+            songs = os.listdir(music_dir)
+            # print(songs)
+            os.startfile(os.path.join(music_dir, songs[0]))
+
+        elif "time" in query:
+            strTime = datetime.datetime.now().strftime("%H:%M:%S")
+            speak(f"Sir, the time is {strTime}")
+
+        elif "open code" in query:
+            code_path = r"C:\Users\yogesh\AppData\Local\Programs\Microsoft VS Code\Code.exe"
+            os.startfile(code_path)
+
+        elif "send email" in query:
+            try:
+                speak("What should i say?")
+                content = input()
+                to = "testscoop4321@gmail.com"
+                sendEmail(to, content)
+                speak("Email has been sent!")
+            except Exception as e:
+                print(e)
+                speak("Sorry, not able to sent email at this moment")
+
+        elif "goodbye" in query:
+            speak("Goodbye sir, have a nice day")
+            break
